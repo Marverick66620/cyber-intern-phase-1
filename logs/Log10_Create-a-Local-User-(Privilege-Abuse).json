@@ -1,0 +1,131 @@
+{
+  "_index": "wazuh-alerts-4.x-2025.06.01",
+  "_id": "A1b2C3d4E5f6G7h8I9j0",
+  "_version": 1,
+  "_score": null,
+  "_source": {
+    "input": {
+      "type": "log"
+    },
+    "agent": {
+      "ip": "192.168.1.50",
+      "name": "win10host",
+      "id": "007"
+    },
+    "manager": {
+      "name": "wazuh-server"
+    },
+    "data": {
+      "win": {
+        "system": {
+          "eventID": "4720",
+          "providerName": "Microsoft-Windows-Security-Auditing",
+          "channel": "Security",
+          "version": "2",
+          "level": "0",
+          "task": "12544",
+          "opcode": "0",
+          "keywords": "0x8020000000000000",
+          "computer": "win10host",
+          "eventRecordID": "987654",
+          "threadID": "1408",
+          "processID": "520",
+          "severityValue": "AUDIT_SUCCESS",
+          "systemTime": "2025-06-01T10:25:43.1234567Z"
+        },
+        "eventdata": {
+          "TargetUserName": "attacker",
+          "TargetDomainName": "WIN10HOST",
+          "TargetSid": "S-1-5-21-123456789-987654321-1234567890-1100",
+          "SubjectUserSid": "S-1-5-21-123456789-987654321-1234567890-1001",
+          "SubjectUserName": "AdminUser",
+          "SubjectDomainName": "WIN10HOST",
+          "SubjectLogonId": "0x3e7",
+          "PrivilegeList": "",
+          "TargetUserId": "S-1-5-21-123456789-987654321-1234567890-1100",
+          "SubjectUserAccountControl": "0x200",
+          "TargetUserAccountControl": "0x100"
+        }
+      }
+    },
+    "rule": {
+      "id": "554",
+      "level": 10,
+      "description": "User account created",
+      "firedtimes": 1,
+      "mail": false,
+      "groups": ["windows", "security", "audit"]
+    },
+    "location": "EventChannel",
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "id": "1654065943123456",
+    "timestamp": "2025-06-01T10:25:43.500+0000",
+    "message": "\"A user account was created.\r\n\r\nSubject:\r\n\tSecurity ID:\t\tS-1-5-21-123456789-987654321-1234567890-1001\r\n\tAccount Name:\t\tAdminUser\r\n\tAccount Domain:\t\tWIN10HOST\r\n\tLogon ID:\t\t0x3E7\r\n\r\nTarget Account:\r\n\tSecurity ID:\t\tS-1-5-21-123456789-987654321-1234567890-1100\r\n\tAccount Name:\t\tattacker\r\n\tAccount Domain:\t\tWIN10HOST\r\n\tAttributes:\t\tUser\r\n"
+  }
+},
+{
+  "_index": "wazuh-alerts-4.x-2025.06.01",
+  "_id": "B2c3D4e5F6g7H8i9J0k1",
+  "_version": 1,
+  "_score": null,
+  "_source": {
+    "input": {
+      "type": "log"
+    },
+    "agent": {
+      "ip": "192.168.1.50",
+      "name": "win10host",
+      "id": "007"
+    },
+    "manager": {
+      "name": "wazuh-server"
+    },
+    "data": {
+      "win": {
+        "system": {
+          "eventID": "4732",
+          "providerName": "Microsoft-Windows-Security-Auditing",
+          "channel": "Security",
+          "version": "2",
+          "level": "0",
+          "task": "12546",
+          "opcode": "0",
+          "keywords": "0x8020000000000000",
+          "computer": "win10host",
+          "eventRecordID": "987655",
+          "threadID": "1409",
+          "processID": "521",
+          "severityValue": "AUDIT_SUCCESS",
+          "systemTime": "2025-06-01T10:26:12.7890123Z"
+        },
+        "eventdata": {
+          "MemberName": "attacker",
+          "GroupName": "Administrators",
+          "SubjectUserSid": "S-1-5-21-123456789-987654321-1234567890-1001",
+          "SubjectUserName": "AdminUser",
+          "SubjectDomainName": "WIN10HOST",
+          "SubjectLogonId": "0x3e7",
+          "TargetSid": "S-1-5-32-544",
+          "TargetUserName": "Administrators"
+        }
+      }
+    },
+    "rule": {
+      "id": "555",
+      "level": 10,
+      "description": "User added to privileged group",
+      "firedtimes": 1,
+      "mail": false,
+      "groups": ["windows", "security", "audit"]
+    },
+    "location": "EventChannel",
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "id": "1654065972789012",
+    "timestamp": "2025-06-01T10:26:13.000+0000",
+    "message": "\"A user was added to a privileged group.\r\n\r\nSubject:\r\n\tSecurity ID:\t\tS-1-5-21-123456789-987654321-1234567890-1001\r\n\tAccount Name:\t\tAdminUser\r\n\tAccount Domain:\t\tWIN10HOST\r\n\tLogon ID:\t\t0x3E7\r\n\r\nGroup:\r\n\tSecurity ID:\t\tS-1-5-32-544\r\n\tGroup Name:\t\tAdministrators\r\n\r\nMember:\r\n\tSecurity ID:\t\tS-1-5-21-123456789-987654321-1234567890-1100\r\n\tAccount Name:\t\tattacker\r\n"
+  }
+}
