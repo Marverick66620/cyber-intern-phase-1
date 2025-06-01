@@ -1,0 +1,4 @@
+Hint:
+Detect beaconing patterns, especially regular intervals of outbound traffic. Look into PowerShell
+Empire, Cobalt Strike, or DNS-based C2.
+Tip: Set up a mock listener using Netcat or Empire and track outbound packets.
