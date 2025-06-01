@@ -1,36 +1,36 @@
 {
-  "timestamp": "2025-05-29T12:54:21.901Z",
+  "timestamp": "2025-05-29T12:42:53.226Z",
   "rule": {
     "level": 10,
-    "id": "100127",
+    "id": "100125",
     "firedtimes": 1,
     "mail": false,
     "groups": [
       "windows",
       "sysmon",
-      "registry",
       "powershell",
+      "registry",
       "defender",
       "evasion",
-      "persistence"
+      "security-tool-disabling"
     ],
-    "pci_dss": ["10.2.2", "10.2.7"],
-    "hipaa": ["164.312.b"],
-    "nist_800_53": ["SI-7", "AU-12"],
-    "tsc": ["CC6.1", "CC7.2"],
+    "pci_dss": ["10.2.2", "10.2.3"],
     "gdpr": ["IV_35.7.d"],
+    "tsc": ["CC6.1", "CC7.2"],
+    "hipaa": ["164.312.b"],
+    "nist_800_53": ["SI-4", "AU-12"],
     "mitre": {
-      "id": ["T1112", "T1059.001"],
+      "id": ["T1562.001", "T1059.001"],
       "technique": [
-        "Modify Registry",
+        "Disable or Modify Tools",
         "PowerShell"
       ],
       "tactic": [
         "Defense Evasion",
-        "Persistence"
+        "Execution"
       ]
     },
-    "description": "Suspicious registry value modification targeting Windows Defender"
+    "description": "Suspicious registry and PowerShell event detected - potential Defender tampering"
   },
   "agent": {
     "id": "003",
@@ -48,8 +48,8 @@
   "manager": {
     "name": "wazuh-manager"
   },
-  "id": "1716987261.904501",
-  "full_log": "PowerShell command executed: Set-ItemProperty -Path HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender -Name DisableAntiSpyware -Value 1\nRegistry value changed: HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\DisableAntiSpyware from 0 to 1",
+  "id": "1716986573.901001",
+  "full_log": "PowerShell executed with administrative privileges: Set-MpPreference -DisableRealtimeMonitoring $true\nRegistry value change: HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\DisableRealtimeMonitoring from 0 to 1",
   "decoder": {
     "name": "windows"
   },
@@ -60,28 +60,28 @@
   "data": {
     "win": {
       "eventdata": {
+        "NewProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "CommandLine": "powershell.exe -Command Set-MpPreference -DisableRealtimeMonitoring $true",
+        "ParentProcessName": "explorer.exe",
+        "IntegrityLevel": "High",
+        "TokenElevationType": "Full",
         "SubjectUserName": "Administrator",
         "SubjectDomainName": "WIN-LAB-PC",
-        "ObjectName": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\DisableAntiSpyware",
-        "OldValueType": "REG_DWORD",
-        "OldValue": "0x0",
-        "NewValue": "0x1",
-        "ProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
         "LogonId": "0x3e7"
       },
       "provider_name": "Microsoft-Windows-Security-Auditing",
       "channel": "Security",
-      "event_id": "4657",
-      "task": "Registry Value Change",
+      "event_id": "4688",
+      "task": "Process Creation",
       "keywords": ["Audit Success"]
     },
     "syscheck": {
-      "path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\DisableAntiSpyware",
+      "path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\DisableRealtimeMonitoring",
       "perm": "rw",
       "event": "modification",
       "value_before": "0",
       "value_after": "1",
-      "mtime": "2025-05-29T12:54:20Z"
+      "mtime": "2025-05-29T12:42:52Z"
     }
   }
 }
