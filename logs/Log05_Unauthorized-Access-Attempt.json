@@ -1,85 +1,87 @@
 {
-  "_index": "wazuh-alerts-4.x-2025.05.28",
-  "_id": "EErrFZcBRKKWOZW8PNyx",
-  "_version": 1,
-  "_score": null,
-  "_source": {
-    "input": {
-      "type": "log"
-    },
-    "agent": {
-      "ip": "192.168.1.7",
-      "name": "windows11",
-      "id": "001"
-    },
-    "manager": {
-      "name": "wazuh-server"
-    },
-    "data": {
-      "win": {
-        "eventdata": {
-          "subjectLogonId": "0x3e7",
-          "parentProcessName": "C:\\\\Windows\\\\System32\\\\svchost.exe",
-          "subjectDomainName": "WORKGROUP",
-          "tokenElevationType": "%%1936",
-          "newProcessId": "0x2cf8",
-          "mandatoryLabel": "S-1-16-16384",
-          "newProcessName": "C:\\\\Windows\\\\System32\\\\schtasks.exe",
-          "processCommandLine": "schtasks /create /sc daily /tn \"UpdateCheck\" /tr \"C:\\malicious\\payload.exe\" /st 12:00",
-          "targetLogonId": "0x3e5",
-          "targetUserName": "LOCAL SERVICE",
-          "subjectUserSid": "S-1-5-18",
-          "processId": "0x638",
-          "targetDomainName": "NT AUTHORITY",
-          "targetUserSid": "S-1-5-19",
-          "subjectUserName": "WINDOWS11$"
-        },
-        "system": {
-          "eventID": "4688",
-          "keywords": "0x8020000000000000",
-          "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
-          "level": "0",
-          "channel": "Security",
-          "opcode": "0",
-          "message": "A new process has been created.\r\n\r\nCreator Subject:\r\n\tSecurity ID:\t\tS-1-5-18\r\n\tAccount Name:\t\tWINDOWS11$\r\n\tAccount Domain:\t\tWORKGROUP\r\n\tLogon ID:\t\t0x3E7\r\n\r\nTarget Subject:\r\n\tSecurity ID:\t\tS-1-5-19\r\n\tAccount Name:\t\tLOCAL SERVICE\r\n\tAccount Domain:\t\tNT AUTHORITY\r\n\tLogon ID:\t\t0x3E5\r\n\r\nProcess Information:\r\n\tNew Process ID:\t\t0x2cf8\r\n\tNew Process Name:\tC:\\Windows\\System32\\schtasks.exe\r\n\tToken Elevation Type:\tTokenElevationTypeDefault (1)\r\n\tMandatory Label:\t\tS-1-16-16384\r\n\tCreator Process ID:\t0x638\r\n\tCreator Process Name:\tC:\\Windows\\System32\\svchost.exe\r\n\tProcess Command Line:\tschtasks /create /sc daily /tn \"UpdateCheck\" /tr \"C:\\malicious\\payload.exe\" /st 12:00\r\n\r\nToken Elevation Type indicates the type of token that was assigned to the new process in accordance with User Account Control policy.\r\n\r\nType 1 is a full token with no privileges removed or groups disabled.  A full token is only used if User Account Control is disabled or if the user is the built-in Administrator account or a service account.\r\n\r\nType 2 is an elevated token with no privileges removed or groups disabled.  An elevated token is used when User Account Control is enabled and the user chooses to start the program using Run as administrator.  An elevated token is also used when an application is configured to always require administrative privilege or to always require maximum privilege, and the user is a member of the Administrators group.\r\n\r\nType 3 is a limited token with administrative privileges removed and administrative groups disabled.  The limited token is used when User Account Control is enabled, the application does not require administrative privilege, and the user does not choose to start the program using Run as administrator.",
-          "version": "2",
-          "systemTime": "2025-05-28T09:12:45.332Z",
-          "eventRecordID": "35812",
-          "threadID": "1888",
-          "computer": "windows11",
-          "task": "13312",
-          "processID": "4",
-          "severityValue": "AUDIT_SUCCESS",
-          "providerName": "Microsoft-Windows-Security-Auditing"
-        }
-      }
-    },
-    "rule": {
-      "firedtimes": 1,
-      "mail": false,
-      "level": 7,
-      "description": "Suspicious process creation: Scheduled Task potentially used for persistence.",
-      "groups": [
-        "windows",
-        "scheduled_task",
-        "persistence"
+  "timestamp": "2025-05-29T12:54:21.901Z",
+  "rule": {
+    "level": 10,
+    "id": "100127",
+    "firedtimes": 1,
+    "mail": false,
+    "groups": [
+      "windows",
+      "sysmon",
+      "registry",
+      "powershell",
+      "defender",
+      "evasion",
+      "persistence"
+    ],
+    "pci_dss": ["10.2.2", "10.2.7"],
+    "hipaa": ["164.312.b"],
+    "nist_800_53": ["SI-7", "AU-12"],
+    "tsc": ["CC6.1", "CC7.2"],
+    "gdpr": ["IV_35.7.d"],
+    "mitre": {
+      "id": ["T1112", "T1059.001"],
+      "technique": [
+        "Modify Registry",
+        "PowerShell"
       ],
-      "id": "67028"
+      "tactic": [
+        "Defense Evasion",
+        "Persistence"
+      ]
     },
-    "location": "EventChannel",
-    "decoder": {
-      "name": "windows_eventchannel"
+    "description": "Suspicious registry value modification targeting Windows Defender"
+  },
+  "agent": {
+    "id": "003",
+    "name": "WIN-LAB-PC",
+    "ip": "192.168.56.101",
+    "os": {
+      "platform": "windows",
+      "version": "10.0.19045",
+      "name": "Windows 10 Pro",
+      "major": "10",
+      "minor": "0",
+      "build": "19045"
+    }
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "id": "1716987261.904501",
+  "full_log": "PowerShell command executed: Set-ItemProperty -Path HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender -Name DisableAntiSpyware -Value 1\nRegistry value changed: HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\DisableAntiSpyware from 0 to 1",
+  "decoder": {
+    "name": "windows"
+  },
+  "input": {
+    "type": "log"
+  },
+  "location": "WinEventLog:Security",
+  "data": {
+    "win": {
+      "eventdata": {
+        "SubjectUserName": "Administrator",
+        "SubjectDomainName": "WIN-LAB-PC",
+        "ObjectName": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\DisableAntiSpyware",
+        "OldValueType": "REG_DWORD",
+        "OldValue": "0x0",
+        "NewValue": "0x1",
+        "ProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "LogonId": "0x3e7"
+      },
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "channel": "Security",
+      "event_id": "4657",
+      "task": "Registry Value Change",
+      "keywords": ["Audit Success"]
     },
-    "id": "1748419965.7894562",
-    "timestamp": "2025-05-28T09:12:45.456+0000"
-  },
-  "fields": {
-    "timestamp": [
-      "2025-05-28T09:12:45.456Z"
-    ]
-  },
-  "sort": [
-    1748419965456
-  ]
+    "syscheck": {
+      "path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\DisableAntiSpyware",
+      "perm": "rw",
+      "event": "modification",
+      "value_before": "0",
+      "value_after": "1",
+      "mtime": "2025-05-29T12:54:20Z"
+    }
+  }
 }
-
