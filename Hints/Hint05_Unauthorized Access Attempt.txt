@@ -1,0 +1,5 @@
+Unauthorized Access Attempt
+Hint:
+Audit logs are your best friend. Search for login attempts outside office hours, use of disabled accounts, or
+access from unusual geolocations.
+Tip: Use failed logon Event ID 4625 and success 4624 to compare patterns
