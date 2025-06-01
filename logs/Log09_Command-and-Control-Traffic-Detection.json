@@ -1,1 +1,71 @@
-
+{
+  "_index": "wazuh-alerts-4.x-2025.06.01",
+  "_id": "NzExT0rBaxN8rIoBHvZq",
+  "_version": 1,
+  "_score": null,
+  "_source": {
+    "input": {
+      "type": "log"
+    },
+    "agent": {
+      "id": "007",
+      "name": "windows11-host",
+      "ip": "192.168.1.20"
+    },
+    "manager": {
+      "name": "wazuh-server"
+    },
+    "data": {
+      "win": {
+        "system": {
+          "eventID": "11",
+          "providerName": "Microsoft-Windows-Sysmon",
+          "channel": "Microsoft-Windows-Sysmon/Operational",
+          "level": "4",
+          "computer": "windows11-host",
+          "systemTime": "2025-06-01T09:32:45.123Z",
+          "eventRecordID": "67543",
+          "processID": "4880",
+          "threadID": "1204",
+          "keywords": "0x8000000000000000",
+          "version": "5"
+        },
+        "eventdata": {
+          "UtcTime": "2025-06-01T09:32:44.987Z",
+          "ProcessGuid": "{a1b2c3d4-e5f6-7890-abcd-ef1234567890}",
+          "ProcessId": "4520",
+          "Image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "TargetFilename": "C:\\Users\\john\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\evil.bat",
+          "CreationUtcTime": "2025-06-01T09:32:44.900Z",
+          "User": "JOHN-PC\\john",
+          "Details": "File created in Startup folder to persist malicious execution"
+        }
+      }
+    },
+    "rule": {
+      "level": 12,
+      "description": "Persistence technique detected: File creation in Startup folder",
+      "id": "34002",
+      "mail": false,
+      "groups": [
+        "windows",
+        "sysmon",
+        "persistence",
+        "file_creation"
+      ]
+    },
+    "decoder": {
+      "name": "sysmon"
+    },
+    "location": "EventChannel",
+    "timestamp": "2025-06-01T09:32:45.123+0000"
+  },
+  "fields": {
+    "timestamp": [
+      "2025-06-01T09:32:45.123Z"
+    ]
+  },
+  "sort": [
+    1685615565123
+  ]
+}
