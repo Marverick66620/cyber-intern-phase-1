@@ -1,0 +1,8 @@
+What to do:
+Run the following:
+powershell -enc
+UwB0AGEAcgB0AC0AUAByAG8AYwBlAHMAcwAgACIAcwBtAG8AYwBoAC4AZQB4AGUAIgA=
+(This base64 runs Start-Process "smoch.exe")
+What gets logged:
+• Sysmon Event ID 1 (Process Create)
+• PowerShell transcript logs
