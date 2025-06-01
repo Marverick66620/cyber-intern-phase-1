@@ -1,3 +1,45 @@
+//Optionally Add: Simulated Log for Shared Resource Access (Event ID 5140)--------------
+{
+  "data": {
+    "win": {
+      "eventdata": {
+        "ShareName": "\\\\*\\ADMIN$",
+        "ShareLocalPath": "C:\\Windows",
+        "AccessMask": "0x1",
+        "AccessReason": "Granted by DACL",
+        "UserSid": "S-1-5-21-4123456789-1122334455-667788990-1002",
+        "UserName": "attacker",
+        "UserDomain": "WORKGROUP",
+        "LogonId": "0x4E5A3"
+      },
+      "system": {
+        "eventID": "5140",
+        "channel": "Security",
+        "providerName": "Microsoft-Windows-Security-Auditing",
+        "computer": "target-host",
+        "systemTime": "2025-05-28T11:08:54.123Z",
+        "message": "A network share object was accessed.\r\n\r\nShare Name: \\\\*\\ADMIN$\r\nShare Path: C:\\Windows\r\nUser: attacker\r\nLogon ID: 0x4E5A3\r\nAccess: 0x1\r\nReason: Granted by DACL"
+      }
+    }
+  },
+  "rule": {
+    "level": 7,
+    "description": "Suspicious ADMIN$ share access from lateral movement attempt.",
+    "groups": [
+      "windows",
+      "network_share",
+      "lateral_movement"
+    ],
+    "id": "18150"
+  },
+  "agent": {
+    "id": "003",
+    "ip": "192.168.1.10",
+    "name": "target-host"
+  },
+  "timestamp": "2025-05-28T11:08:54.123+0000"
+}
+// Simulated Wazuh Log: Pass the Hash via PsExec (Event ID 4624)-----
 {
   "_index": "wazuh-alerts-4.x-2025.05.28",
   "_id": "QWt4P5kBaxN8rIoBCs7m",
