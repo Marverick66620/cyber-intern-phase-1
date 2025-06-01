@@ -1,1 +1,87 @@
-
+{
+  "timestamp": "2025-05-29T12:54:21.901Z",
+  "rule": {
+    "level": 10,
+    "id": "100127",
+    "firedtimes": 1,
+    "mail": false,
+    "groups": [
+      "windows",
+      "sysmon",
+      "registry",
+      "powershell",
+      "defender",
+      "evasion",
+      "persistence"
+    ],
+    "pci_dss": ["10.2.2", "10.2.7"],
+    "hipaa": ["164.312.b"],
+    "nist_800_53": ["SI-7", "AU-12"],
+    "tsc": ["CC6.1", "CC7.2"],
+    "gdpr": ["IV_35.7.d"],
+    "mitre": {
+      "id": ["T1112", "T1059.001"],
+      "technique": [
+        "Modify Registry",
+        "PowerShell"
+      ],
+      "tactic": [
+        "Defense Evasion",
+        "Persistence"
+      ]
+    },
+    "description": "Suspicious registry value modification targeting Windows Defender"
+  },
+  "agent": {
+    "id": "003",
+    "name": "WIN-LAB-PC",
+    "ip": "192.168.56.101",
+    "os": {
+      "platform": "windows",
+      "version": "10.0.19045",
+      "name": "Windows 10 Pro",
+      "major": "10",
+      "minor": "0",
+      "build": "19045"
+    }
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "id": "1716987261.904501",
+  "full_log": "PowerShell command executed: Set-ItemProperty -Path HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender -Name DisableAntiSpyware -Value 1\nRegistry value changed: HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\DisableAntiSpyware from 0 to 1",
+  "decoder": {
+    "name": "windows"
+  },
+  "input": {
+    "type": "log"
+  },
+  "location": "WinEventLog:Security",
+  "data": {
+    "win": {
+      "eventdata": {
+        "SubjectUserName": "Administrator",
+        "SubjectDomainName": "WIN-LAB-PC",
+        "ObjectName": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\DisableAntiSpyware",
+        "OldValueType": "REG_DWORD",
+        "OldValue": "0x0",
+        "NewValue": "0x1",
+        "ProcessName": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "LogonId": "0x3e7"
+      },
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "channel": "Security",
+      "event_id": "4657",
+      "task": "Registry Value Change",
+      "keywords": ["Audit Success"]
+    },
+    "syscheck": {
+      "path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\DisableAntiSpyware",
+      "perm": "rw",
+      "event": "modification",
+      "value_before": "0",
+      "value_after": "1",
+      "mtime": "2025-05-29T12:54:20Z"
+    }
+  }
+}
