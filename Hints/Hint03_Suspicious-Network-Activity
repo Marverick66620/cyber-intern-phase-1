@@ -1,0 +1,4 @@
+Hint:
+Use tools like Wireshark or tcpdump to monitor abnormal traffic patterns. Look for port scanning, repeated
+connection attempts, or odd DNS queries.
+Tip: Try nmap -sS and watch how it shows up in logs.
