@@ -1,0 +1,4 @@
+Hint:
+Look for email headers, links to shortened or weird domains, and attachments with .exe, .js, or
+.vbs extensions. Use email gateways or SIEM to flag these.
+Tip: Use the open-source tool “GoPhish” to simulate phishing in your lab.
