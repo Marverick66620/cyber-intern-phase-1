@@ -1,1 +1,88 @@
+{
+  "_index": "wazuh-alerts-4.x-2025.05.28",
+  "_id": "QWt4P5kBaxN8rIoBCs7m",
+  "_version": 1,
+  "_score": null,
+  "_source": {
+    "input": {
+      "type": "log"
+    },
+    "agent": {
+      "ip": "192.168.1.10",
+      "name": "target-host",
+      "id": "003"
+    },
+    "manager": {
+      "name": "wazuh-server"
+    },
+    "data": {
+      "win": {
+        "eventdata": {
+          "TargetUserName": "attacker",
+          "TargetDomainName": "WORKGROUP",
+          "TargetLogonId": "0x4e5a3",
+          "LogonType": "3",
+          "LogonProcessName": "NtLmSsp",
+          "AuthenticationPackageName": "NTLM",
+          "WorkstationName": "PTH-ATTACKER",
+          "IpAddress": "192.168.1.7",
+          "IpPort": "51822",
+          "SubjectUserSid": "S-1-0-0",
+          "SubjectUserName": "-",
+          "SubjectDomainName": "-",
+          "SubjectLogonId": "0x0",
+          "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+          "TransmittedServices": "-",
+          "LmPackageName": "-",
+          "KeyLength": "128"
+        },
+        "system": {
+          "eventID": "4624",
+          "keywords": "0x8020000000000000",
+          "providerGuid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+          "level": "0",
+          "channel": "Security",
+          "opcode": "0",
+          "version": "2",
+          "systemTime": "2025-05-28T11:08:52.232Z",
+          "eventRecordID": "48124",
+          "threadID": "972",
+          "computer": "target-host",
+          "task": "12544",
+          "processID": "456",
+          "severityValue": "AUDIT_SUCCESS",
+          "providerName": "Microsoft-Windows-Security-Auditing",
+          "message": "An account was successfully logged on.\r\n\r\nSubject:\r\n\tSecurity ID:\t\tNULL SID\r\n\tAccount Name:\t\t-\r\n\tAccount Domain:\t\t-\r\n\tLogon ID:\t\t0x0\r\n\r\nLogon Information:\r\n\tLogon Type:\t\t3\r\n\tRestricted Admin Mode:\t-\r\n\tVirtual Account:\t\tNo\r\n\tElevated Token:\t\tNo\r\n\r\nImpersonation Level:\t\tImpersonation\r\n\r\nNew Logon:\r\n\tSecurity ID:\t\tS-1-5-21-4123456789-1122334455-667788990-1002\r\n\tAccount Name:\t\tattacker\r\n\tAccount Domain:\t\tWORKGROUP\r\n\tLogon ID:\t\t0x4E5A3\r\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\r\n\r\nProcess Information:\r\n\tProcess ID:\t\t0x0\r\n\tProcess Name:\t\t-\r\n\r\nNetwork Information:\r\n\tWorkstation Name:\tPTH-ATTACKER\r\n\tSource Network Address:\t192.168.1.7\r\n\tSource Port:\t\t51822\r\n\r\nDetailed Authentication Information:\r\n\tLogon Process:\t\tNtLmSsp\r\n\tAuthentication Package:\tNTLM\r\n\tTransited Services:\t\t-\r\n\tPackage Name (NTLM only):\t-\r\n\tKey Length:\t\t128\r\n\r\nThis event is generated when a logon session is created. It is generated on the computer that was accessed."
+        }
+      }
+    },
+    "rule": {
+      "firedtimes": 2,
+      "mail": false,
+      "level": 10,
+      "description": "Possible Pass-the-Hash attack detected: NTLM logon from non-standard source.",
+      "groups": [
+        "windows",
+        "authentication_success",
+        "lateral_movement",
+        "pt_hash"
+      ],
+      "id": "18200"
+    },
+    "location": "EventChannel",
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "id": "1748424532.7899991",
+    "timestamp": "2025-05-28T11:08:52.232+0000"
+  },
+  "fields": {
+    "timestamp": [
+      "2025-05-28T11:08:52.232Z"
+    ]
+  },
+  "sort": [
+    1748424532232
+  ]
+}
 
