@@ -1,0 +1,4 @@
+Hint:
+Check for creation of new admin users, or modifications to registry keys, services, or token
+impersonation attempts.
+Tip: Tools like whoami /priv, accesschk, and winPEAS reveal escalation paths.
