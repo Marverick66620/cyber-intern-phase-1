@@ -1,4 +1,4 @@
-//Optionally Add: Simulated Log for Shared Resource Access (Event ID 5140)--------------
+"_comment": "Optionally Add: Simulated Log for Shared Resource Access (Event ID 5140)--------------"
 {
   "data": {
     "win": {
@@ -39,7 +39,7 @@
   },
   "timestamp": "2025-05-28T11:08:54.123+0000"
 }
-// Simulated Wazuh Log: Pass the Hash via PsExec (Event ID 4624)-----
+"_comment": "Simulated Wazuh Log: Pass the Hash via PsExec (Event ID 4624)-----"
 {
   "_index": "wazuh-alerts-4.x-2025.05.28",
   "_id": "QWt4P5kBaxN8rIoBCs7m",
